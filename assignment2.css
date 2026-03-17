@@ -13,20 +13,16 @@
     }
 
     h1 {
-      margin-bottom: 10px;
+      font-size: 30px;
     }
-
-    p {
-      margin-bottom: 12px;
-    }
-
+    
     .layout {
       display: grid;
       width: 100vw;
       height: 100vh;
 
       grid-template-columns: 0.25fr 1fr 1fr;
-      grid-template-rows: 0.25fr 2fr 0.5fr;
+      grid-template-rows: 0.5fr 2fr 0.5fr;
 
       grid-template-areas:
         "header header header"
@@ -70,4 +66,18 @@
       font-size: 12px;
       margin-top: 6px;
       opacity: 0.9;
+    }
+
+    #puzzle-grid {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+    }
+
+    .grid-cell {
+      width: 25px;
+      height: 25px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      cursor: pointer;
     }

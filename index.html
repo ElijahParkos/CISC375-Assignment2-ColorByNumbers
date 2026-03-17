@@ -5,28 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color By Numbers</title>
     <link rel="stylesheet" href="assignment2.css">
-    <script src="assignment2.js"></script>
+    <script src="assignment2.js" defer></script>
 </head>
 <body>
     <div class="layout">
     <header class="box header">
-
+      <h1 id="title"></h1>
     </header>
 
 
     <main class="box main">
-
-
+      <div id="puzzle-grid"></div>
     </main>
 
     <aside class="box aside">
-
-
+      <div id="puzzle-list">
+      </div>
     </aside>
 
     <footer class="box footer">
 
     </footer>
+
+    <!--The following div holds all the images. It will be hidden to the user, just there for javascript to get image data.-->
+    <div hidden>
+      <canvas id="hidden-canvas"></canvas>
+      <img src="images/ExampleArt1.png" id ="hidden-image">
+    </div>
   </div>
 </body>
 </html>
