@@ -22,12 +22,11 @@
       height: 100vh;
 
       grid-template-columns: 0.25fr 1fr 1fr;
-      grid-template-rows: 0.5fr 2fr 0.5fr;
+      grid-template-rows: 0.25fr 2fr;
 
       grid-template-areas:
         "header header header"
         "aside main main"
-        "footer footer footer";
     }
 
     .header {
@@ -74,10 +73,10 @@
     }
 
     .grid-cell {
-      width: 25px;
-      height: 25px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
+      width: 32px;
+      height: 32px;
+      background-color: #c8c8c8;
+      border: 1px solid #969696;
+      box-sizing: border-box;  
       cursor: pointer;
     }

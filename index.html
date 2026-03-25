@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color By Numbers</title>
     <link rel="stylesheet" href="assignment2.css">
+    <link rel="icon" href="images/favicon.ico">
     <script src="assignment2.js" defer></script>
 </head>
 <body>
@@ -19,7 +20,13 @@
     </main>
 
     <aside class="box aside">
-      <div id="puzzle-list">
+      <div id="top-half-aside">
+        <h2>Puzzles</h2>
+        <div id="puzzle-list"></div>
+      </div>
+      <div id="bottom-half-aside">
+        <h2>Colors</h2>
+        <div id="color-selector"></div>
       </div>
     </aside>
 
@@ -30,7 +37,9 @@
     <!--The following div holds all the images. It will be hidden to the user, just there for javascript to get image data.-->
     <div hidden>
       <canvas id="hidden-canvas"></canvas>
-      <img src="images/ExampleArt1.png" id ="hidden-image">
+      <img src="images/Canvas.png" id ="Canvas">
+      <img src="images/ExampleArt2.png" id ="Test2">
+      <img src="images/ExampleArt3.png" id ="Test3">
     </div>
   </div>
 </body>
