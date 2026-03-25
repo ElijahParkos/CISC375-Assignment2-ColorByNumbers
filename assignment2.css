@@ -25,23 +25,26 @@
       grid-template-rows: 0.25fr 2fr;
 
       grid-template-areas:
-        "header header header"
+        "aside header header"
         "aside main main"
     }
 
     .header {
       grid-area: header;
-      background: #1e88e5;
+      background: #040c40;
     }
 
     .main {
       grid-area: main;
-      background: #43a047;
+      border-top: solid 10px #1d2453;
+      border-left: solid 10px #1d2453;
+      background: #363d66;
     }
 
     .aside {
       grid-area: aside;
-      background: #fb8c00;
+      flex-direction:column;
+      background: #040c40;
     }
 
     .footer {
@@ -51,7 +54,6 @@
 
     .box {
       color: #fff;
-      border-radius: 6px;
       padding: 2% 4%;
       display: flex;
       align-items: center;
@@ -68,15 +70,37 @@
     }
 
     #puzzle-grid {
+      height: 100%;
+      aspect-ratio: 1 / 1;
       display: grid;
+      border: solid 10px #1d2453;
       grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
     }
 
     .grid-cell {
-      width: 32px;
-      height: 32px;
+      width: 100%;
+      height: 100%;
       background-color: #c8c8c8;
       border: 1px solid #969696;
       box-sizing: border-box;  
       cursor: pointer;
+    }
+
+    #top-half-aside {
+      position: relative;
+      bottom: 10%;
+    }
+
+    #puzzle-list {
+      display:list-item;
+      list-style-type:none;
+    }
+
+    #puzzle-list li button{
+      min-width: 100%;
+      border-radius: 10px;
+      border: solid 2px #1d2453;
+      background-color: #363d66;
+      color: #fff;
+      cursor: pointer; 
     }
