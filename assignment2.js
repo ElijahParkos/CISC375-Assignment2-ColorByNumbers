@@ -4,18 +4,9 @@ let selected_color = 'rgba(0,0,0,1)';
 
 //find whether the mouse is currently held down
 //this will be used to drag over multiple cells, rather than having to click one-by-one
-let mouse_down = false;
-document.addEventListener('mousedown', ()=>{mouse_down = true;console.log("down");});
-document.addEventListener('mouseup',()=>{mouse_down=false;console.log("up")});
-document.addEventListener('touchstart', ()=>{mouse_down = true;console.log("down");});
-document.addEventListener('touchend',()=>{mouse_down=false;console.log("up")});
-
-
-//change the title to the name given
-function setTitle(name) {
-    const title = document.querySelector("#title");
-    title.textContent = name;
-}
+let held_down = false;
+document.addEventListener('pointerdown', ()=>{held_down = true;});
+document.addEventListener('pointerup',()=>{held_down = false;});
 
 //to access a puzzle, you can do puzzles[x].name or puzzles[x].id
 const puzzles = [
@@ -23,6 +14,22 @@ const puzzles = [
     {name: "Test 2", id: "Test2"},
     {name: "Test 3", id: "Test3"}
 ];
+
+const STORAGE_KEY = "colorByNumbers_puzzles";
+
+window.addEventListener('storage',(e)=>{
+    const changed_puzzle = e.key.split('_')[1];
+    if(changed_puzzle==puzzles[loaded_puzzle].id) {
+        createGrid();
+    }
+});
+
+
+//change the title to the name given
+function setTitle(name) {
+    const title = document.querySelector("#title");
+    title.textContent = name;
+}
 
 
 //go through the pixel data of the current image and create a grid cell for each one
@@ -33,15 +40,15 @@ function createGrid() {
     let data = getImageData(puzzles[loaded_puzzle].id);
     //using a set for colors, we can attempt to add every color in the data and it will automatically remove duplicates
     current_colors.clear();
+    let current_storage = loadStorage();
     let x = 0;
     let y = 0;
     for(let i = 0; i<data.length;i+=4) {
         const cell = document.createElement("button");
         cell.className = "grid-cell";
-
+        cell.id = `cell-${x}-${y}`;
         cell.dataset.x = x;
         cell.dataset.y = y;
-        cell.id = `cell-${x}-${y}`;
 
         let r = data[i];
         let g = data[i+1];
@@ -49,16 +56,24 @@ function createGrid() {
         let a = data[i+3]/255.0;
         let color = `rgba(${r},${g},${b},${a})`;
         current_colors.add(color);
-
         cell.dataset.c = color;
-        cell.dataset.filled = "false";
 
-        cell.addEventListener('click', ()=> {
-            buttonClick(cell);
-        });
+        if(current_storage[convertCoordsToIndex(x,y)] == '0') { //cell has not been clicked in storage
+            cell.addEventListener('pointerdown', ()=> {
+                buttonClick(cell);
+            });
 
+            cell.addEventListener('pointerenter', ()=> {
+                if(held_down) {
+                    buttonClick(cell);
+                }
+            });   
+        } else { //cell has been clicked in storage
+            cell.style.backgroundColor = color;
+        }
+
+       
         grid.appendChild(cell);
-
         x++;
         if(x>15) {
             x=0;
@@ -66,8 +81,9 @@ function createGrid() {
         }
     }
 
-    createColorList();
+    createColorList(current_storage);
 }
+
 
 //change to a new loaded puzzle
 //connected to the sidebar puzzle buttons
@@ -77,6 +93,7 @@ function changePage(puzzle_number) {
     createGrid();
 }
 
+
 //create list of buttons in the sidebar for switching puzzles
 function createPuzzleList() {
     const container = document.querySelector("#puzzle-list");
@@ -85,9 +102,11 @@ function createPuzzleList() {
     for(let i=0;i<puzzles.length;i++) {
         const p = puzzles[i];
         const btn = document.createElement("button");
+        const li = document.createElement("li");
         btn.textContent = p.name;
         btn.addEventListener("click", () => {changePage(i);});
-        container.appendChild(btn);
+        li.appendChild(btn);
+        container.appendChild(li);
     }
 }
 
@@ -95,12 +114,14 @@ function createPuzzleList() {
 //go through the set of current colors and assign each one a number
 //set the text content of each grid cell to the correct number
 //finally, create a button for each color
-function createColorList() {
+function createColorList(current_storage) {
     let color_numbers = [...current_colors];
     for(let y=0;y<16;y++) {
         for(let x=0;x<16;x++) {
             const cell = document.querySelector(`#cell-${x}-${y}`);
-            cell.textContent = (color_numbers.indexOf(cell.dataset.c)+1);
+            if(current_storage[convertCoordsToIndex(x,y)] == '0') { //set cell's text content only if that cell hasn't been clicked
+                cell.textContent = (color_numbers.indexOf(cell.dataset.c)+1);
+            }
         }
     }
 
@@ -136,19 +157,27 @@ function getImageData(image_id) {
     return data;
 }
 
+
 //fills in the clicked cell with the correct color if it is the currently selected color (and it isn't already filled)
 function buttonClick(button) {
-    if(button.dataset.filled == "false" && button.dataset.c == selected_color) {
+    let current_data = loadStorage();
+    const storage_index = convertCoordsToIndex(Number(button.dataset.x),Number(button.dataset.y));
+    if(current_data[storage_index]=='0' && button.dataset.c == selected_color) {
         button.style.backgroundColor = button.dataset.c;
         button.textContent = '';
-        button.dataset.filled = "true";
+        current_data = modifyString(current_data,storage_index,"1");
+        setStorage(current_data);
     }
+
+
 }
+
 
 //switches the currently selected color to the color of the selector button that was just pressed
 function switchColor(button) {
     selected_color = button.dataset.c;
 }
+
 
 //takes in a string for an rgba color and returns the best text color to use ontop of that background
 //this is used for the color selecting buttons on the sidebar
@@ -163,6 +192,38 @@ function getContrastColor(rgbaColor) {
     } else {
         return 'rgba(255,255,255,1)';
     }
+}
+
+//converts a cell's x and y coordinates into a 0-255 index for use with the localstorage strings
+function convertCoordsToIndex(x,y) {
+    return (y*16)+x;
+}
+
+//returns the local storage string for the currently selected puzzle
+function loadStorage() {
+    let current_data = localStorage.getItem(`colorByNumbers_${puzzles[loaded_puzzle].id}`);
+    if (current_data==null) {
+        current_data = createStorage();
+    }
+    return current_data;
+}
+
+//sets the local storage string for the currently selected puzzle to the item passed in
+function setStorage(item) {
+    localStorage.setItem(`colorByNumbers_${puzzles[loaded_puzzle].id}`,item);
+}
+
+//create a string in storage for the currently selected puzzle
+function createStorage() {
+    current_data = '0';
+    current_data = current_data.repeat(256);
+    localStorage.setItem(`colorByNumbers_${puzzles[loaded_puzzle].id}`,current_data);
+    return current_data;
+}
+
+//replaces character at index with the new character
+function modifyString(str,index,new_char) {
+    return(str.substring(0,index)+new_char+str.substring(index+1));
 }
 
 
