@@ -8,11 +8,16 @@ let held_down = false;
 document.addEventListener('pointerdown', ()=>{held_down = true;});
 document.addEventListener('pointerup',()=>{held_down = false;});
 
+let progress = 0;
+
 //to access a puzzle, you can do puzzles[x].name or puzzles[x].id
 const puzzles = [
     {name: "Canvas", id: "Canvas"},
-    {name: "Test 2", id: "Test2"},
-    {name: "Test 3", id: "Test3"}
+    {name: "Blossoms", id: "Blossoms"},
+    {name: "Sunset", id: "Sunset"},
+    {name: "Knight", id: "Knight"},
+    {name: "Train", id: "Train"},
+    {name: "Island", id: "Island"}
 ];
 
 const STORAGE_KEY = "colorByNumbers_puzzles";
@@ -34,6 +39,7 @@ function setTitle(name) {
 
 //go through the pixel data of the current image and create a grid cell for each one
 function createGrid() {
+    progress = 0;
     const grid = document.querySelector("#puzzle-grid");
     grid.innerHTML = "";
 
@@ -70,6 +76,9 @@ function createGrid() {
             });   
         } else { //cell has been clicked in storage
             cell.style.backgroundColor = color;
+            cell.style.color = color;
+            cell.textContent = '0';
+            updateProgress();
         }
 
        
@@ -131,7 +140,6 @@ function createColorList(current_storage) {
         const btn = document.createElement('button');
         btn.textContent = (i+1);
         btn.dataset.c = color_numbers[i];
-
         
         if(i==0) {
             selected_color = color_numbers[i]; //set default color to whatever the first one is when we load a puzzle
@@ -164,9 +172,10 @@ function buttonClick(button) {
     const storage_index = convertCoordsToIndex(Number(button.dataset.x),Number(button.dataset.y));
     if(current_data[storage_index]=='0' && button.dataset.c == selected_color) {
         button.style.backgroundColor = button.dataset.c;
-        button.textContent = '';
+        button.style.color = button.dataset.c;
         current_data = modifyString(current_data,storage_index,"1");
         setStorage(current_data);
+        updateProgress();
     }
 
 
@@ -226,6 +235,19 @@ function modifyString(str,index,new_char) {
     return(str.substring(0,index)+new_char+str.substring(index+1));
 }
 
+//increments the total progress and checks when the puzzle is complete
+function updateProgress() {
+    progress++;
+    if(progress>= 256) {
+        const cells = document.querySelectorAll('.grid-cell');
+        for(let i=0;i<cells.length;i++) {
+            cells[i].style.borderColor = 'transparent';
+        }
+        
+    }
+}
 
 changePage(loaded_puzzle);
 createPuzzleList();
+
+//document.documentElement.style.setProperty('--cell-border-color','transparent');
