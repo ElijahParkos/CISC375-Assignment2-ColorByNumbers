@@ -63,7 +63,9 @@ function createGrid() {
         let color = `rgba(${r},${g},${b},${a})`;
         current_colors.add(color);
         cell.dataset.c = color;
-
+        
+        grid.appendChild(cell);
+        
         if(current_storage[convertCoordsToIndex(x,y)] == '0') { //cell has not been clicked in storage
             cell.addEventListener('pointerdown', ()=> {
                 buttonClick(cell);
@@ -79,10 +81,11 @@ function createGrid() {
             cell.style.color = color;
             cell.textContent = '0';
             updateProgress();
+            cell.style.cursor = "default";
         }
 
        
-        grid.appendChild(cell);
+        
         x++;
         if(x>15) {
             x=0;
@@ -111,11 +114,9 @@ function createPuzzleList() {
     for(let i=0;i<puzzles.length;i++) {
         const p = puzzles[i];
         const btn = document.createElement("button");
-        const li = document.createElement("li");
         btn.textContent = p.name;
         btn.addEventListener("click", () => {changePage(i);});
-        li.appendChild(btn);
-        container.appendChild(li);
+        container.appendChild(btn);
     }
 }
 
@@ -176,6 +177,7 @@ function buttonClick(button) {
         current_data = modifyString(current_data,storage_index,"1");
         setStorage(current_data);
         updateProgress();
+        button.style.cursor = "default";
     }
 
 
