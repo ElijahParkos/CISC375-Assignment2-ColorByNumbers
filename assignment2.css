@@ -97,7 +97,6 @@ h1 {
   display: grid;
   row-gap: 5px;
   grid-template-rows: auto auto auto auto auto auto;
-  margin-top: 5px;
 }
 
 #puzzle-list button{
@@ -127,10 +126,16 @@ h1 {
   aspect-ratio: 1/1;
 }
 
+#color-selector button.selected {
+  border-color: var(--font-color);
+}
+
+
 #color-selector button:hover {
   cursor:pointer;
   border-color: var(--font-color);
 }
+
 
 #settings-button {
   background-color: transparent;

@@ -65,7 +65,7 @@ function createGrid() {
         cell.dataset.c = color;
         
         grid.appendChild(cell);
-        
+
         if(current_storage[convertCoordsToIndex(x,y)] == '0') { //cell has not been clicked in storage
             cell.addEventListener('pointerdown', ()=> {
                 buttonClick(cell);
@@ -186,7 +186,14 @@ function buttonClick(button) {
 
 //switches the currently selected color to the color of the selector button that was just pressed
 function switchColor(button) {
+    const color_selectors = document.querySelectorAll("#color-selector button")
+    for(let c of color_selectors) {
+        if(c.classList.contains("selected")) {
+            c.classList.remove("selected")
+        }
+    }
     selected_color = button.dataset.c;
+    button.classList.add("selected");
 }
 
 
