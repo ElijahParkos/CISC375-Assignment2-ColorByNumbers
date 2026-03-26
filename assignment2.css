@@ -8,10 +8,10 @@
 }
 
 * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-  }
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 html {
   user-select: none;
@@ -47,11 +47,10 @@ h1 {
   text-align: center;
 }
 
-
 .header {
-  justify-content: space-between;
   grid-area: header;
   background: var(--second-bg-color);
+  justify-content: space-between;
 }
 
 .main {
@@ -63,15 +62,9 @@ h1 {
 
 .aside {
   grid-area: aside;
-  row-gap: 10%;
   flex-direction:column;
   background: var(--second-bg-color);
-}
-
-.label {
-  font-size: 12px;
-  margin-top: 6px;
-  opacity: 0.9;
+  row-gap: 10%;
 }
 
 #puzzle-grid {
@@ -93,27 +86,28 @@ h1 {
 }
 
 #puzzle-list {
-  grid-area: puzzle-list;
   display: grid;
   row-gap: 5px;
   grid-template-rows: auto auto auto auto auto auto;
+  margin-top: 5px;
 }
 
 #puzzle-list button{
   width: 100px;
   border-radius: 10px;
-  border: solid 2px var(--second-bg-color);
+  border: solid 2px var(--border-color);
   background-color: var(--main-bg-color);
   color: var(--font-color);
   cursor: pointer; 
 }
 
+
 #puzzle-list button:hover {
   border: solid 2px var(--font-color);
+  text-decoration: underline;
 }
 
 #color-selector {
-  grid-area: color-selector;
   display: grid;
   grid-template-columns: auto auto auto;
   margin-top: 10px;
@@ -130,18 +124,23 @@ h1 {
   border-color: var(--font-color);
 }
 
-
 #color-selector button:hover {
   cursor:pointer;
   border-color: var(--font-color);
+  text-decoration: underline;
 }
-
 
 #settings-button {
   background-color: transparent;
   border: none;
   width: 32px;
   height: 32px;
+}
+
+#settings-button:hover {
+  cursor: pointer;
+  border: 2px solid var(--font-color);
+  border-radius: 10px;
 }
 
 #settings-button img {
@@ -196,4 +195,126 @@ h1 {
   .aside {
     gap: 5%;
   }
+}
+
+dialog {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border:none;
+  background: none;
+  color: var(--font-color);
+  user-select: none;
+}
+
+#popup {
+  width:300px;
+  height:200px;
+  background-color: var(--main-bg-color);
+  text-align: center;
+  border: 10px solid var(--border-color);
+}
+
+dialog[open] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#close {
+  background-color: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  padding:2px;
+  margin:8px;
+  text-align: right;
+}
+
+#close:hover {
+  cursor: pointer;
+  border: 2px solid var(--font-color);
+}
+
+#close img {
+  image-rendering: pixelated;
+  width: 100%;
+  height: auto;
+}
+
+#top-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+#top-line h2 {
+  text-align: center;
+}
+
+#palette-buttons{
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+#reset-button {
+  width: 100px;
+  border-radius: 10px;
+  border: solid 2px var(--second-bg-color);
+  background-color: var(--main-bg-color);
+  color: var(--font-color);
+  cursor: pointer; 
+}
+
+#reset-button:hover {
+  border-color: var(--font-color);
+  text-decoration: underline;
+}
+
+#default-palette {
+  width:50px;
+  height:50px;
+  border-radius: 5px;
+  color: white;
+  background-color: #363d66;
+  border: solid 2px #1d2453;
+}
+
+#default-palette:hover {
+  border-color: white;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#light-palette {
+  width:50px;
+  height:50px;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  border: solid 2px #969696;
+}
+
+#light-palette:hover {
+  border-color: black;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#dark-palette {
+  width:50px;
+  height:50px;
+  border-radius: 5px;
+  color: white;
+  background-color: #181C14;
+  border: solid 2px black;
+}
+
+#dark-palette:hover {
+  border-color: white;
+  cursor:pointer;
+  text-decoration: underline;
 }

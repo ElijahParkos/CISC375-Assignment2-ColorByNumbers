@@ -13,7 +13,7 @@
     <header class="box header">
       <div></div>
       <h1 id="title"></h1>
-      <button id="settings-button"><img src="images/SettingsIcon.png"></button>
+      <button id="settings-button"><img id="settings-image" src="images/SettingsIcon.png" alt="A pixel art cog wheel"></button>
     </header>
 
 
@@ -44,6 +44,26 @@
       <img src="images/Train.png" id ="Train">
       <img src="images/Island.png" id="Island">
     </div>
+
+    <!--This dialog is used to show the settings menu.-->
+    <dialog>
+      <div id="popup">
+        <div id="top-line">
+          <div style="width:32px;"></div>
+          <h2>Settings</h2>
+          <button id="close">
+            <img src="images/CloseButton.png" alt="A pixel art x" id="close-image">
+          </button>
+        </div>
+        <h3>Color Palettes</h3>
+        <div id="palette-buttons">
+          <button id="default-palette">Default</button>
+          <button id="light-palette">Light</button>
+          <button id="dark-palette">Dark</button>
+        </div>
+        <button id="reset-button">Reset Puzzle</button>
+      </div>
+    </dialog>
   </div>
 </body>
 </html>
