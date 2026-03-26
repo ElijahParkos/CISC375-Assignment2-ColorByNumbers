@@ -42,9 +42,7 @@ function createGrid() {
     const grid = document.querySelector("#puzzle-grid");
     grid.innerHTML = "";
 
-    console.log(loaded_puzzle);
     let data = getImageData(puzzles[loaded_puzzle].id);
-    console.log(data);
     //using a set for colors, we can attempt to add every color in the data and it will automatically remove duplicates
     current_colors.clear();
     let current_storage = loadStorage();
