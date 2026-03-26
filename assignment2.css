@@ -93,6 +93,10 @@ h1 {
   bottom: 10%;
 }
 
+#bottom-half-aside {
+  margin-bottom: 50%;
+}
+
 #puzzle-list {
   display: grid;
   row-gap: 5px;
@@ -131,6 +135,19 @@ h1 {
   border-color: var(--font-color);
 }
 
+#settings-button {
+  background-color: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+
+#settings-button img {
+  image-rendering: pixelated;
+  width: 100%;
+  height: auto;
+}
+
 @media (max-width: 899px) {
   .main {
     border-left: 0px;
@@ -155,6 +172,10 @@ h1 {
     grid-template-columns: auto auto;
     grid-template-rows: auto auto auto;
     column-gap: 5px;
+  }
+
+  #bottom-half-aside {
+    margin-bottom: 0;
   }
 }
 
