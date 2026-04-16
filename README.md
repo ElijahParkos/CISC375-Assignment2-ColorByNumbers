@@ -11,4 +11,6 @@ Our code for assignment 2 is all contained within a single file (assignment2.js)
 - Showing the settings window and updating the CSS to show the user's selected color palette
 - Adding custom keyboard controls with the arrow keys
 
-<img width="540" height="425" alt="Assignment 2 dependency diagram" src="https://github.com/user-attachments/assets/cb9e4dd2-2482-4e16-97b9-92b6d7e32aac"/>
+### Diagram
+
+<img alt="Assignment 2 dependency diagram" src="https://github.com/user-attachments/assets/cb9e4dd2-2482-4e16-97b9-92b6d7e32aac"/>
