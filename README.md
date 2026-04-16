@@ -140,4 +140,4 @@ I ended up following the entire refactor proposal.
 
 ### helper.js
 
-- Moved getContrastColor(), convertCoordsToIndex(), and modifyString() into this file.
+- Moved getContrastColor(), convertCoordsToIndex(), and modifyString() into this file
