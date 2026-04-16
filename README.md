@@ -23,29 +23,73 @@ Our code for assignment 2 is all contained within a single file (assignment2.js)
 
 Brings together and manages all the other modules.
 
+- loaded_puzzle
+- current_colors
+- puzzles
+
 #### build.js
 
 Handles all DOM manipulation and data importing/interpretation functions.
 
-- test 1
-- test 2
+- createGrid()
+- setTitle()
+- createPuzzleList()
+- createColorList()
+- getImageData()
 
 #### logic.js
 
 Handles interactivity logic for puzzles and settings.
 
+- buttonClick()
+- changePage()
+- switchColor()
+- updateProgess()
+- changePalette()
+- selected_color
+
 #### storage.js
 
 Handles all functions related to local storage.
+
+- loadStorage()
+- setStorage()
+- createStorage()
 
 #### focus.js
 
 Handles the custom keyboard input system.
 
+- keydown eventListener
+
 #### helper.js
 
 Contains extra miscellaneous helper functions.
 
+- getContrastColor()
+- convertCoordsToIndex()
+- modifyString()
+
 ### Refactor Items
+
+#### Rename assignment2.js -> main.js
+
+main.js is a common and professional naming convention for a website's primary JavaScript file. 
+
+#### Rename assignment2.css -> main-style.css
+
+Like the previous item, this tries to follow a more professional naming convention.
+
+#### Extract page rendering logic into build.js
+
+Page rendering is currently messy with many function dependencies, logic will need to be extracted to work as a separate module.
+
+#### Extract puzzle and settings logic into logic.js
+
+Puzzle logic is also messy and connected to functions that belong in other modules.
+
+#### Move relavent functions to storage.js, focus.js, and helper.js
+
+The functions in these modules will be largely unchanged, they just need to be moved into separate files.
 
 ### Diagram
