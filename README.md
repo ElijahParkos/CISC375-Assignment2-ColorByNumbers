@@ -17,29 +17,35 @@ Our code for assignment 2 is all contained within a single file (assignment2.js)
 
 ## Modular Design Proposal
 
-### main.js
+### Modules
+
+#### main.js
 
 Brings together and manages all the other modules.
 
-### build.js
+#### build.js
 
 Handles all DOM manipulation and data importing/interpretation functions.
 
 - test 1
 - test 2
 
-### logic.js
+#### logic.js
 
 Handles interactivity logic for puzzles and settings.
 
-### storage.js
+#### storage.js
 
 Handles all functions related to local storage.
 
-### focus.js
+#### focus.js
 
 Handles the custom keyboard input system.
 
-### helper.js
+#### helper.js
 
 Contains extra miscellaneous helper functions.
+
+### Refactor Items
+
+### Diagram
