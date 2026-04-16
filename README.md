@@ -14,3 +14,32 @@ Our code for assignment 2 is all contained within a single file (assignment2.js)
 ### Diagram
 
 <img alt="Assignment 2 dependency diagram" src="https://github.com/user-attachments/assets/cb9e4dd2-2482-4e16-97b9-92b6d7e32aac"/>
+
+## Modular Design Proposal
+
+### main.js
+
+Brings together and manages all the other modules.
+
+### build.js
+
+Handles all DOM manipulation and data importing/interpretation functions.
+
+- test 1
+- test 2
+
+### logic.js
+
+Handles interactivity logic for puzzles and settings.
+
+### storage.js
+
+Handles all functions related to local storage.
+
+### focus.js
+
+Handles the custom keyboard input system.
+
+### helper.js
+
+Contains extra miscellaneous helper functions.
