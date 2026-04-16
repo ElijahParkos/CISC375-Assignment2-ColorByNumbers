@@ -101,3 +101,43 @@ The functions in these modules will be largely unchanged, they just need to be m
 ### Diagram
 
 <img alt="A diagram showing my proposal for the refactored module setup" src="https://github.com/user-attachments/assets/73c2a052-03a6-4e20-97db-64bc8477278c" />
+
+## Refactor Implementation
+
+I ended up following the entire refactor proposal.
+
+### main.js
+
+- Renamed (from assignment2.js)
+- Moved most function logic out into the other modules
+- Kept certain global values (e.g. loaded_puzzle)
+- Left functionality that manages other module files (e.g. changePage())
+- Also left initilization code (e.g. window onload event) 
+
+### build.js
+
+- Moved the set of colors and several DOM manipulation functions into this file
+- Also moved functionality for loading image data here
+- Refactored the functions to work as a part of an external module
+
+### logic.js
+
+- Moved selected_color, progress, and several game logic functions into this file
+- Also moved the settings page initilization and color palette handling here
+- Refactored the functions to work as a part of an external module
+- Added getter and setter for the selected color
+
+### storage.js
+
+- Moved all local storage functions into this file
+- Added getters and setters for saved palette and saved puzzle
+
+### focus.js
+
+- Moved the large event handler callback for custom keyboard navigation into this file
+- Split the callback into four separate functions for readability
+- Added initializeFocusEvent() to be called from main.js
+
+### helper.js
+
+- Moved getContrastColor(), converCoordsToIndex(), and 
