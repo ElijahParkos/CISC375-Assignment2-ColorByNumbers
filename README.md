@@ -112,7 +112,7 @@ I ended up following the entire refactor proposal.
 - Moved most function logic out into the other modules
 - Kept certain global values (e.g. loaded_puzzle)
 - Left functionality that manages other module files (e.g. changePage())
-- Also left initilization code (e.g. window onload event) 
+- Added initializePage(), which handles initilization across all modules
 
 ### build.js
 
@@ -140,4 +140,4 @@ I ended up following the entire refactor proposal.
 
 ### helper.js
 
-- Moved getContrastColor(), convertCoordsToIndex(), and 
+- Moved getContrastColor(), convertCoordsToIndex(), and modifyString() into this file.
