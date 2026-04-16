@@ -24,15 +24,16 @@ Our code for assignment 2 is all contained within a single file (assignment2.js)
 Brings together and manages all the other modules.
 
 - loaded_puzzle
-- current_colors
+- held_down
 - puzzles
+- changePage()
 
 #### build.js
 
 Handles all DOM manipulation and data importing/interpretation functions.
 
+- current_colors
 - createGrid()
-- setTitle()
 - createPuzzleList()
 - createColorList()
 - getImageData()
@@ -41,12 +42,13 @@ Handles all DOM manipulation and data importing/interpretation functions.
 
 Handles interactivity logic for puzzles and settings.
 
+- selected_color
+- progress
 - buttonClick()
-- changePage()
 - switchColor()
+- setTitle()
 - updateProgess()
 - changePalette()
-- selected_color
 
 #### storage.js
 
@@ -80,6 +82,10 @@ main.js is a common and professional naming convention for a website's primary J
 
 Like the previous item, this tries to follow a more professional naming convention.
 
+#### Move JavaScript files into scripts folder
+
+Now that there are so many JavaScript files, they will all be stored in a folder to keep organization clean.
+
 #### Extract page rendering logic into build.js
 
 Page rendering is currently messy with many function dependencies, logic will need to be extracted to work as a separate module.
@@ -93,3 +99,5 @@ Puzzle logic is also messy and connected to functions that belong in other modul
 The functions in these modules will be largely unchanged, they just need to be moved into separate files.
 
 ### Diagram
+
+<img alt="A diagram showing my proposal for the refactored module setup" src="https://github.com/user-attachments/assets/73c2a052-03a6-4e20-97db-64bc8477278c" />
